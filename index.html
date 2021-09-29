@@ -1,0 +1,49 @@
+---
+layout: page
+title: Tim
+description: A jekyll theme for tech lovers, developers and designers
+---
+<header>
+	<div class="left">
+		{% for post in site.posts limit:1 %}
+		<img src="{{post.image}}" alt="{{post.description}}">
+		<h1 class="article">{{ post.title }}</h1>
+		<a class="readmore" href="{{post.url}}">READ MORE</a>
+		{% endfor %}
+	</div>
+	<div class="right">
+		<div class="title">{{site.title}}</div>
+		<div class="subtitle">{{site.description}}</div>
+	</div>
+</header>
+<div class="content">
+	<div class="articles">
+		<h1>Articles</h1>
+		<label class="search" for="search">
+			<lunar-icon icon="search">
+				<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="none"
+					stroke="currentColor" stroke-width="2" stroke-linejoin="round" class="lunar-icons">
+					<circle cx="15" cy="9" r="6"></circle>
+					<path d="M3 21l8-8"></path>
+				</svg>
+			</lunar-icon>
+			<input type="search" id="search" placeholder="Search...">
+	</div>
+	<div class="list">
+		{% assign rows = site.posts.size | divided_by: 2.0 | ceil %}
+		{% for i in (1..rows) limit: 20 %}
+		{% assign offset = forloop.index0 | times: 2 %}
+		<div class="row">
+			{% for post in site.posts limit:2 offset:offset %}
+			<div class="article" link="{{post.url}}">
+				<img src="{{post.image}}" alt="{{post.description}}">
+				<p>{{post.title}}</p>
+			</div>
+			{% endfor %}
+		</div>
+		{% endfor %}
+	</div>
+</div>
+</div>
+
+<link rel="preload" href="articles.json" as="fetch" type="text/json">
